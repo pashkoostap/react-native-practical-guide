@@ -1,12 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      placeName: ''
+    };
+
+    this.placeNameChangedHandler = this.placeNameChangedHandler.bind(this);
+  }
+
+  placeNameChangedHandler(placeName) {
+    this.setState({ placeName });
+  }
+
   render() {
+    const { placeName } = this.state;
+
     return (
       <View style={styles.container}>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <TextInput
+          style={{ borderColor: 'red', width: '90%' }}
+          value={placeName}
+          onChangeText={this.placeNameChangedHandler}
+        />
       </View>
     );
   }
