@@ -1,19 +1,21 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const ListItem = ({ placeName }) => {
+const ListItem = ({ placeName, onItemPressed }) => {
   return (
-    <View style={styles.listItem}>
-      <Text tyle={styles.listItemText}>{placeName}</Text>
-    </View>
+    <TouchableOpacity onPress={onItemPressed}>
+      <View style={styles.listItem}>
+        <Text tyle={styles.listItemText}>{placeName}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   listItem: {
-    width: '100%',
+    width: "100%",
     padding: 10,
-    backgroundColor: '#eee',
+    backgroundColor: "#eee",
     marginBottom: 10
   }
 });

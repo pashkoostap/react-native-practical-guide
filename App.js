@@ -1,14 +1,16 @@
-import React from 'react';
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
+import React from "react";
+import { StyleSheet, TextInput, Text, View, Button } from "react-native";
 
-import ListItem from './src/ListItem/ListItem';
+import ListItem from "./src/ListItem/ListItem";
+import PlaceList from "./src/PlaceList/PlaceList";
+import PlaceInput from "./src/PlaceInput/PlaceInput";
 
 export default class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      placeName: '',
+      placeName: "",
       places: []
     };
 
@@ -24,17 +26,13 @@ export default class App extends React.Component {
     const { placeName } = this.state;
 
     if (!placeName.trim()) {
-      alert('The input is empty');
+      alert("The input is empty");
+    } else {
+      this.setState(prevState => ({
+        places: [...prevState.places, prevState.placeName],
+        placeName: ""
+      }));
     }
-
-    this.setState(prevState => ({
-      places: [...prevState.places, prevState.placeName],
-      placeName: ''
-    }));
-  }
-
-  renderPlaces(places = []) {
-    return places.map((place, i) => <ListItem key={i} placeName={place} />);
   }
 
   render() {
@@ -42,22 +40,13 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputComponent}
-            placeholder="An awesome place"
-            value={placeName}
-            onChangeText={this.placeNameChangedHandler}
-          />
+        <PlaceInput
+          placeName={placeName}
+          placeNameChangedHandler={this.placeNameChangedHandler}
+          placeNameSubmitHandler={this.placeNameSubmitHandler}
+        />
 
-          <Button
-            title="Button text"
-            style={styles.buttonStyles}
-            onPress={this.placeNameSubmitHandler}
-          />
-        </View>
-
-        <View style={styles.listContainer}>{this.renderPlaces(places)}</View>
+        <PlaceList places={places} />
       </View>
     );
   }
@@ -67,23 +56,8 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-  },
-  inputContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  inputComponent: {
-    width: '65%'
-  },
-  buttonStyles: {
-    width: '30%'
-  },
-  listContainer: {
-    alignSelf: 'stretch'
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "flex-start"
   }
 });
