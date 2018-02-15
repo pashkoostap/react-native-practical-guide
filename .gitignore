@@ -16,5 +16,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# android temp
-android/app/build/tmp
+# android and ios builds
+android
+ios

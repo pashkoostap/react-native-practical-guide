@@ -1,9 +1,5 @@
 [
     {
-        "merged": "C:\\Users\\ostap.pashko\\__projects\\__study\\react-native-practical-guide\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
-        "source": "C:\\Users\\ostap.pashko\\__projects\\__study\\react-native-practical-guide\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "E:\\OSP\\sites\\__react-native\\practical-guide\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
         "source": "E:\\OSP\\sites\\__react-native\\practical-guide\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     }
