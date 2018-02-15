@@ -1,0 +1,4 @@
+#Thu Feb 15 11:39:33 EET 2018
+base.0=C\:\\Users\\ostap.pashko\\__projects\\__study\\react-native-practical-guide\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+renamed.0=classes.dex
+file.0=C\:\\Users\\ostap.pashko\\__projects\\__study\\react-native-practical-guide\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
