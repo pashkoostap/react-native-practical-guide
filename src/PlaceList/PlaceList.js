@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 
 import ListItem from "../ListItem/ListItem";
 
-const PlaceList = ({ places }) => {
+const PlaceList = ({ places, onPlaceItemDelete }) => {
   return (
     <View style={styles.listContainer}>
       {places.map((place, i) => {
@@ -11,7 +11,7 @@ const PlaceList = ({ places }) => {
           <ListItem
             key={i}
             placeName={place}
-            onItemPressed={() => alert("item pressed" + i)}
+            onItemPressed={() => onPlaceItemDelete(i)}
           />
         );
       })}

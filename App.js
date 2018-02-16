@@ -16,6 +16,7 @@ export default class App extends React.Component {
 
     this.placeNameChangedHandler = this.placeNameChangedHandler.bind(this);
     this.placeNameSubmitHandler = this.placeNameSubmitHandler.bind(this);
+    this.onPlaceItemDelete = this.onPlaceItemDelete.bind(this);
   }
 
   placeNameChangedHandler(placeName) {
@@ -35,6 +36,12 @@ export default class App extends React.Component {
     }
   }
 
+  onPlaceItemDelete(index) {
+    this.setState(prevState => ({
+      places: prevState.places.filter((item, i) => i !== index)
+    }));
+  }
+
   render() {
     const { placeName, places } = this.state;
 
@@ -46,7 +53,7 @@ export default class App extends React.Component {
           placeNameSubmitHandler={this.placeNameSubmitHandler}
         />
 
-        <PlaceList places={places} />
+        <PlaceList places={places} onPlaceItemDelete={this.onPlaceItemDelete} />
       </View>
     );
   }
