@@ -30,15 +30,19 @@ export default class App extends React.Component {
       alert("The input is empty");
     } else {
       this.setState(prevState => ({
-        places: [...prevState.places, prevState.placeName],
+        places: [
+          ...prevState.places,
+          { key: Math.random() + new Date(), value: prevState.placeName }
+        ],
         placeName: ""
       }));
     }
   }
 
-  onPlaceItemDelete(index) {
+  onPlaceItemDelete(key) {
+    console.log(this.state.places);
     this.setState(prevState => ({
-      places: prevState.places.filter((item, i) => i !== index)
+      places: prevState.places.filter(item => item.key !== key)
     }));
   }
 
