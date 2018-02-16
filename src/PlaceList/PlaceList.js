@@ -8,9 +8,10 @@ const PlaceList = ({ places, onPlaceItemDelete }) => {
     <FlatList
       style={styles.listContainer}
       data={places}
-      renderItem={({ item: { key, value } }) => (
+      renderItem={({ item: { key, placeName, placeImage } }) => (
         <ListItem
-          placeName={value}
+          placeName={placeName}
+          placeImage={placeImage}
           onItemPressed={() => onPlaceItemDelete(key)}
         />
       )}

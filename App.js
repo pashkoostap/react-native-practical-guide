@@ -5,6 +5,8 @@ import ListItem from "./src/ListItem/ListItem";
 import PlaceList from "./src/PlaceList/PlaceList";
 import PlaceInput from "./src/PlaceInput/PlaceInput";
 
+import defaultPlaceImage from "./src/assets/test.jpg";
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -32,7 +34,11 @@ export default class App extends React.Component {
       this.setState(prevState => ({
         places: [
           ...prevState.places,
-          { key: Math.random() + new Date(), value: prevState.placeName }
+          {
+            key: Math.random() + new Date(),
+            placeName: prevState.placeName,
+            placeImage: defaultPlaceImage
+          }
         ],
         placeName: ""
       }));
@@ -40,7 +46,6 @@ export default class App extends React.Component {
   }
 
   onPlaceItemDelete(key) {
-    console.log(this.state.places);
     this.setState(prevState => ({
       places: prevState.places.filter(item => item.key !== key)
     }));

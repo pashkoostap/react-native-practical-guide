@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const ListItem = ({ placeName, onItemPressed }) => {
+const ListItem = ({ placeName, placeImage, onItemPressed }) => {
   return (
     <TouchableOpacity onPress={onItemPressed}>
       <View style={styles.listItem}>
+        <Image source={placeImage} style={styles.placeImageStyles} />
         <Text tyle={styles.listItemText}>{placeName}</Text>
       </View>
     </TouchableOpacity>
@@ -13,10 +14,17 @@ const ListItem = ({ placeName, onItemPressed }) => {
 
 const styles = StyleSheet.create({
   listItem: {
+    flexDirection: "row",
+    alignItems: "center",
     width: "100%",
     padding: 10,
     backgroundColor: "#eee",
     marginBottom: 10
+  },
+  placeImageStyles: {
+    marginRight: 10,
+    height: 40,
+    width: 40
   }
 });
 
