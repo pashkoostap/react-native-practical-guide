@@ -1,12 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, TextInput, Text, View, Button } from "react-native";
+import {
+  addPlace,
+  deletePlace,
+  selectPlace,
+  unselectPlace
+} from "./src/store/actions";
 
 import ListItem from "./src/ListItem/ListItem";
 import PlaceList from "./src/PlaceList/PlaceList";
 import PlaceInput from "./src/PlaceInput/PlaceInput";
 import PlaceDetail from "./src/PlaceDetail/PlaceDetail";
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
 
@@ -33,46 +40,26 @@ export default class App extends React.Component {
     if (!placeName.trim()) {
       alert("The input is empty");
     } else {
-      this.setState(prevState => ({
-        places: [
-          ...prevState.places,
-          {
-            key: Math.random() + new Date(),
-            placeName: prevState.placeName,
-            placeImage: {
-              uri:
-                "http://ukrainetrek.com/blog/wp-content/uploads/2011/12/ukrainian-carpathians-landscape-16.jpg"
-            }
-          }
-        ],
-        placeName: ""
-      }));
+      this.props.addPlace(placeName);
+      this.setState(prevState => ({ placeName: "" }));
     }
   }
 
   onPlaceItemSelect(key) {
-    this.setState(prevState => ({
-      selectedPlace: prevState.places.find(item => item.key === key)
-    }));
+    this.props.selectPlace(key);
   }
 
   onPlaceItemDelete() {
-    this.setState(prevState => ({
-      places: prevState.places.filter(
-        item => item.key !== prevState.selectedPlace.key
-      ),
-      selectedPlace: null
-    }));
+    this.props.deletePlace();
   }
 
   onPlaceDetailModalClose() {
-    this.setState(prevState => ({
-      selectedPlace: null
-    }));
+    this.props.unselectPlace();
   }
 
   render() {
-    const { placeName, places, selectedPlace } = this.state;
+    const { placeName } = this.state;
+    const { placesReducer: { places, selectedPlace } } = this.props;
 
     return (
       <View style={styles.container}>
@@ -103,3 +90,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   }
 });
+
+const mapStateToProps = ({ placesReducer }) => {
+  return { placesReducer };
+};
+
+const mapActionsToProps = dispatch => {
+  return {
+    addPlace: placeName => dispatch(addPlace(placeName)),
+    deletePlace: () => dispatch(deletePlace()),
+    selectPlace: placeKey => dispatch(selectPlace(placeKey)),
+    unselectPlace: () => dispatch(unselectPlace())
+  };
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(App);
