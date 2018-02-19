@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const PlaceDetail = ({
   selectedPlace,
@@ -27,6 +28,8 @@ const PlaceDetail = ({
             color="red"
             onPress={onPlaceItemDelete}
           />
+
+          <Icon size={30} color="red" name="ios-trash" />
           <Button title="Close modal" onPress={onPlaceDetailModalClose} />
         </View>
       </View>
