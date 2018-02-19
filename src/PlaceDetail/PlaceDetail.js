@@ -1,5 +1,14 @@
 import React from "react";
-import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
+import {
+  Modal,
+  View,
+  Image,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const PlaceDetail = ({
   selectedPlace,
@@ -21,13 +30,20 @@ const PlaceDetail = ({
         <Image source={placeImage} style={styles.placeImage} />
         <Text style={styles.placeName}>{placeName}</Text>
 
-        <View>
-          <Button
-            title="Delete place"
-            color="red"
-            onPress={onPlaceItemDelete}
-          />
-          <Button title="Close modal" onPress={onPlaceDetailModalClose} />
+        <View style={styles.buttonsWrap}>
+          <TouchableOpacity onPress={onPlaceItemDelete}>
+            <View style={styles.buttonStyles}>
+              <Icon size={30} color="red" name="md-trash" />
+              <Text style={styles.textStyles}>Delete</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={onPlaceDetailModalClose}>
+            <View style={styles.buttonStyles}>
+              <Icon size={30} color="black" name="md-close" />
+              <Text style={styles.textStyles}>Close</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -50,6 +66,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     marginBottom: 10
+  },
+  buttonsWrap: {
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  buttonStyles: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  textStyles: {
+    marginLeft: 10
   }
 });
 
