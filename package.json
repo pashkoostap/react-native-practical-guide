@@ -12,15 +12,14 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js",
-    "bundle":
-      "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
+    "bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "jest": {
     "preset": "react-native"
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native": "0.52.0",
+    "react-native": "^0.53.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2"
   }
