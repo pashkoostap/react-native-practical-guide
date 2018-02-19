@@ -14,7 +14,7 @@ const PlaceDetail = ({
     <Modal
       style={styles.modalContainer}
       onRequestClose={onPlaceDetailModalClose}
-      visible={selectedPlace}
+      visible={!!selectedPlace}
       animationType="slide"
     >
       <View style={styles.viewWrapContainer}>
