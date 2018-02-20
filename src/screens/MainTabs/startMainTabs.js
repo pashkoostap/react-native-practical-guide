@@ -16,7 +16,9 @@ const startMainTabs = () => {
           title: "Find place",
           icon: sources[0],
           navigatorButtons: {
-            leftButtons: [{ icon: sources[2], title: "Menu" }]
+            leftButtons: [
+              { icon: sources[2], title: "Menu", id: "sideDrawerToggle" }
+            ]
           }
         },
         {
@@ -25,7 +27,9 @@ const startMainTabs = () => {
           title: "Share place",
           icon: sources[1],
           navigatorButtons: {
-            leftButtons: [{ icon: sources[2], title: "Menu" }]
+            leftButtons: [
+              { icon: sources[2], title: "Menu", id: "sideDrawerToggle" }
+            ]
           }
         }
       ],
