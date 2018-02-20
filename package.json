@@ -12,6 +12,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js",
+    "clean": "cd android && gradlew clean",
     "bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "jest": {
@@ -20,6 +21,7 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "^0.53.2",
+    "react-native-navigation": "^1.1.382",
     "react-native-vector-icons": "^4.5.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2"
