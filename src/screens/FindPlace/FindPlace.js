@@ -14,14 +14,11 @@ class FindPlaceScreen extends Component {
   }
 
   onNavigatorEvent(event) {
-    if (event.type === "NavBarButtonPress") {
-      if (event.id === "sideDrawerToggle") {
-        this.props.navigator.toggleDrawer({
-          side: "left"
-        });
-      }
+    if (event.type === "NavBarButtonPress" && event.id === "sideDrawerToggle") {
+      this.props.navigator.toggleDrawer({
+        side: "left"
+      });
     }
-    console.log(event);
   }
 
   onPlaceItemSelect(placeKey) {
