@@ -13,7 +13,11 @@ class SharePlaceScreen extends Component {
   }
 
   addPlace(placeName) {
-    this.props.addPlace(placeName);
+    if (!placeName.trim()) {
+      alert("Input is empty");
+    } else {
+      this.props.addPlace(placeName);
+    }
   }
 
   render() {

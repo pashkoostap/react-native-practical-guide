@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   View,
   Image,
@@ -7,27 +7,42 @@ import {
   StyleSheet,
   TouchableOpacity
 } from "react-native";
+import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
+import { deletePlace } from "../../store/actions/places";
 
-const PlaceDetail = ({ selectedPlace, onPlaceItemDelete }) => {
-  const { placeImage, placeName } = selectedPlace;
+class PlaceDetail extends Component {
+  constructor() {
+    super();
 
-  return (
-    <View style={styles.viewWrapContainer}>
-      <Image source={placeImage} style={styles.placeImage} />
-      <Text style={styles.placeName}>{placeName}</Text>
+    this.onPlaceItemDelete = this.onPlaceItemDelete.bind(this);
+  }
 
-      <View style={styles.buttonsWrap}>
-        <TouchableOpacity onPress={onPlaceItemDelete}>
-          <View style={styles.buttonStyles}>
-            <Icon size={30} color="red" name="md-trash" />
-            <Text style={styles.textStyles}>Delete</Text>
-          </View>
-        </TouchableOpacity>
+  onPlaceItemDelete() {
+    this.props.deletePlace(this.props.selectedPlace.key);
+    this.props.navigator.pop();
+  }
+
+  render() {
+    const { selectedPlace: { placeImage, placeName } } = this.props;
+
+    return (
+      <View style={styles.viewWrapContainer}>
+        <Image source={placeImage} style={styles.placeImage} />
+        <Text style={styles.placeName}>{placeName}</Text>
+
+        <View style={styles.buttonsWrap}>
+          <TouchableOpacity onPress={this.onPlaceItemDelete}>
+            <View style={styles.buttonStyles}>
+              <Icon size={30} color="red" name="md-trash" />
+              <Text style={styles.textStyles}>Delete</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -60,4 +75,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PlaceDetail;
+const mapDispatchToProps = dispatch => {
+  return {
+    deletePlace: placeKey => dispatch(deletePlace(placeKey))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(PlaceDetail);
