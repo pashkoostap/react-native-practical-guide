@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 import startMainTabs from "../MainTabs/startMainTabs";
 import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
+import HeadingText from "../../components/UI/HeadingText/HeadingText";
 
 class AuthScreen extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class AuthScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Please Log In</Text>
+        <HeadingText style={styles.textHeading}>Please Log In</HeadingText>
 
         <Button title="Switch to login" onPress={() => {}} />
 
@@ -47,8 +48,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "80%"
   },
+  textHeading: {
+    marginBottom: 10
+  },
   inputStyles: {
-    backgroundColor: "#eee"
+    backgroundColor: "#eee",
+    borderColor: "#bbb"
   }
 });
 
