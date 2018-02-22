@@ -22,6 +22,7 @@ Navigation.registerComponent("SideDrawer", () => SideDrawer, store, Provider);
 Navigation.startSingleScreenApp({
   screen: {
     screen: "AuthScreen",
-    title: "Login"
+    title: "Login",
+    navigatorStyle: { navBarHidden: true }
   }
 });
