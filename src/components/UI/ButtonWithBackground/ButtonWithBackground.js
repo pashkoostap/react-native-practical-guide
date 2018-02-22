@@ -11,7 +11,10 @@ const ButtonWithBackground = ({ onPress, children, color }) => (
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
     margin: 5,
     borderRadius: 2
   },
