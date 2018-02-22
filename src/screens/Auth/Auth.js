@@ -12,6 +12,7 @@ import startMainTabs from "../MainTabs/startMainTabs";
 import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
 import HeadingText from "../../components/UI/HeadingText/HeadingText";
 import MainText from "../../components/UI/MainText/MainText";
+import ButtonWithBackground from "../../components/UI/ButtonWithBackground/ButtonWithBackground";
 
 class AuthScreen extends Component {
   constructor(props) {
@@ -41,7 +42,9 @@ class AuthScreen extends Component {
             <HeadingText>Please Log In</HeadingText>
           </MainText>
 
-          <Button title="Switch to login" onPress={() => {}} />
+          <ButtonWithBackground color="#29aaf4" onPress={() => {}}>
+            Switch to login
+          </ButtonWithBackground>
 
           <View style={styles.inputContainer}>
             <DefaultInput placeholder="Your email" style={styles.inputStyles} />
@@ -52,7 +55,9 @@ class AuthScreen extends Component {
             />
           </View>
 
-          <Button title="Login" onPress={this.loginHandler} />
+          <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
+            Login
+          </ButtonWithBackground>
         </View>
       </ImageBackground>
     );
