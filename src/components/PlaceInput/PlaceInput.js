@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+
+import DefaultInput from "../UI/DefaultInput/DefaultInput";
 
 class PlaceInput extends Component {
   constructor() {
@@ -10,7 +12,6 @@ class PlaceInput extends Component {
     };
 
     this.placeNameChangedHandler = this.placeNameChangedHandler.bind(this);
-    this.placeNameSubmitHandler = this.placeNameSubmitHandler.bind(this);
   }
 
   placeNameChangedHandler(placeName) {
@@ -21,30 +22,14 @@ class PlaceInput extends Component {
     }
   }
 
-  placeNameSubmitHandler() {
-    this.props.addPlace(this.state.placeName);
-
-    this.setState(prevState => ({ placeName: "" }));
-  }
-
   render() {
     const { placeName } = this.state;
 
     return (
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.inputComponent}
-          placeholder="An awesome place"
-          value={placeName}
-          onChangeText={this.placeNameChangedHandler}
-        />
-
-        <Button
-          title="Add"
-          style={styles.buttonStyles}
-          onPress={this.placeNameSubmitHandler}
-        />
-      </View>
+      <DefaultInput
+        value={placeName}
+        onChangeText={this.placeNameChangedHandler}
+      />
     );
   }
 }
