@@ -19,16 +19,21 @@ class AuthScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.windowBreakPoint = 500;
+
     this.state = {
-      windowHeight: Dimensions.get("window").height > 500
+      viewMode:
+        Dimensions.get("window").height > this.windowBreakPoint
+          ? "portrait"
+          : "album"
     };
 
     Dimensions.addEventListener("change", dimensions => {
-      this.setWindowHeight(dimensions.window.height);
+      this.setViewMode(dimensions.window.height);
     });
 
     this.loginHandler = this.loginHandler.bind(this);
-    this.setWindowHeight = this.setWindowHeight.bind(this);
+    this.setViewMode = this.setViewMode.bind(this);
   }
 
   static navigationOptions = {
@@ -37,8 +42,10 @@ class AuthScreen extends Component {
     }
   };
 
-  setWindowHeight(windowHeight) {
-    this.setState(prevState => ({ windowHeight }));
+  setViewMode(windowHeight) {
+    this.setState(prevState => ({
+      viewMode: windowHeight > this.windowBreakPoint ? "portrait" : "album"
+    }));
   }
 
   loginHandler() {
@@ -46,16 +53,13 @@ class AuthScreen extends Component {
   }
 
   render() {
-    const minWindowHeight = 500;
-    const windowHeightCondition = this.state.windowHeight > minWindowHeight;
-    const passwordContainerStyles = {
-      flexDirection: windowHeightCondition ? "column" : "row",
-      flexWrap: windowHeightCondition ? "wrap" : "nowrap",
-      justifyContent: windowHeightCondition ? "flex-start" : "space-between"
-    };
+    const isPortraitMode = this.state.viewMode === "portrait";
+    const passwordContainerStyles = isPortraitMode
+      ? styles.passwordContainerPortrait
+      : styles.passwordContainerAlbum;
     let headingText = null;
 
-    if (windowHeightCondition) {
+    if (isPortraitMode) {
       headingText = (
         <MainText>
           <HeadingText>Please Log In</HeadingText>
@@ -120,6 +124,14 @@ const styles = StyleSheet.create({
   bgImage: {
     width: "100%",
     flex: 1
+  },
+  passwordContainerPortrait: {
+    flexDirection: "column",
+    justifyContent: "flex-start"
+  },
+  passwordContainerAlbum: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
 
