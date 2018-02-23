@@ -28,12 +28,8 @@ class AuthScreen extends Component {
           : "album"
     };
 
-    Dimensions.addEventListener("change", dimensions => {
-      this.setViewMode(dimensions.window.height);
-    });
-
     this.loginHandler = this.loginHandler.bind(this);
-    this.setViewMode = this.setViewMode.bind(this);
+    this.dementionsChangeListener = this.dementionsChangeListener.bind(this);
   }
 
   static navigationOptions = {
@@ -42,14 +38,23 @@ class AuthScreen extends Component {
     }
   };
 
-  setViewMode(windowHeight) {
+  dementionsChangeListener(dimensions) {
     this.setState(prevState => ({
-      viewMode: windowHeight > this.windowBreakPoint ? "portrait" : "album"
+      viewMode:
+        dimensions.window.height > this.windowBreakPoint ? "portrait" : "album"
     }));
   }
 
   loginHandler() {
     startMainTabs();
+  }
+
+  componentWillMount() {
+    Dimensions.addEventListener("change", this.dementionsChangeListener);
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener("change", this.dementionsChangeListener);
   }
 
   render() {
