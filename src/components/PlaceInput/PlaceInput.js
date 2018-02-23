@@ -3,10 +3,15 @@ import { StyleSheet } from "react-native";
 
 import DefaultInput from "../UI/DefaultInput/DefaultInput";
 
-const PlaceInput = ({ placeName, placeNameChangedHandler }) => (
+const PlaceInput = ({
+  placeName,
+  placeNameChangedHandler,
+  placeNameSubmitHandler
+}) => (
   <DefaultInput
     value={placeName}
     onChangeText={placeNameChangedHandler}
+    onSubmitEditing={placeNameSubmitHandler}
     blurOnSubmit={true}
   />
 );

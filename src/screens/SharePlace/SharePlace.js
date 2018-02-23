@@ -77,6 +77,7 @@ class SharePlaceScreen extends Component {
             placeholder="Place Name"
             placeName={placeName}
             placeNameChangedHandler={this.placeNameChangedHandler}
+            placeNameSubmitHandler={this.addPlace}
           />
 
           <View style={styles.button}>
