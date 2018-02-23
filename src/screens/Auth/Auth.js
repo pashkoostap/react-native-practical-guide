@@ -5,7 +5,8 @@ import {
   TextInput,
   Button,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  Dimensions
 } from "react-native";
 
 import startMainTabs from "../MainTabs/startMainTabs";
@@ -32,15 +33,23 @@ class AuthScreen extends Component {
   }
 
   render() {
+    let headingText = null;
+
+    if (Dimensions.get("window").height > 500) {
+      headingText = (
+        <MainText>
+          <HeadingText>Please Log In</HeadingText>
+        </MainText>
+      );
+    }
+
     return (
       <ImageBackground
         source={{ uri: "https://www.w3schools.com/howto/img_fjords.jpg" }}
         style={styles.bgImage}
       >
         <View style={styles.container}>
-          <MainText>
-            <HeadingText>Please Log In</HeadingText>
-          </MainText>
+          {headingText}
 
           <ButtonWithBackground color="#29aaf4" onPress={() => {}}>
             Switch to login
@@ -48,11 +57,20 @@ class AuthScreen extends Component {
 
           <View style={styles.inputContainer}>
             <DefaultInput placeholder="Your email" style={styles.inputStyles} />
-            <DefaultInput placeholder="Password" style={styles.inputStyles} />
-            <DefaultInput
-              placeholder="Confirm password"
-              style={styles.inputStyles}
-            />
+            <View style={styles.passwordContainer}>
+              <View>
+                <DefaultInput
+                  placeholder="Password"
+                  style={styles.inputStyles}
+                />
+              </View>
+              <View>
+                <DefaultInput
+                  placeholder="Confirm password"
+                  style={styles.inputStyles}
+                />
+              </View>
+            </View>
           </View>
 
           <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
@@ -76,11 +94,18 @@ const styles = StyleSheet.create({
   },
   inputStyles: {
     backgroundColor: "#eee",
-    borderColor: "#bbb"
+    borderColor: "#bbb",
+    minWidth: "45%"
   },
   bgImage: {
     width: "100%",
     flex: 1
+  },
+  passwordContainer: {
+    flexDirection: Dimensions.get("window").height > 500 ? "column" : "row",
+    flexWrap: Dimensions.get("window").height > 500 ? "wrap" : "nowrap",
+    justifyContent:
+      Dimensions.get("window").height > 500 ? "flex-start" : "space-between"
   }
 });
 
