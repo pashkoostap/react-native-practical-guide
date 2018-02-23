@@ -3,36 +3,13 @@ import { StyleSheet } from "react-native";
 
 import DefaultInput from "../UI/DefaultInput/DefaultInput";
 
-class PlaceInput extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      placeName: ""
-    };
-
-    this.placeNameChangedHandler = this.placeNameChangedHandler.bind(this);
-  }
-
-  placeNameChangedHandler(placeName) {
-    if (!placeName.trim()) {
-      alert("Input is empty");
-    } else {
-      this.setState(prevState => ({ placeName }));
-    }
-  }
-
-  render() {
-    const { placeName } = this.state;
-
-    return (
-      <DefaultInput
-        value={placeName}
-        onChangeText={this.placeNameChangedHandler}
-      />
-    );
-  }
-}
+const PlaceInput = ({ placeName, placeNameChangedHandler }) => (
+  <DefaultInput
+    value={placeName}
+    onChangeText={placeNameChangedHandler}
+    blurOnSubmit={true}
+  />
+);
 
 const styles = StyleSheet.create({
   inputContainer: {

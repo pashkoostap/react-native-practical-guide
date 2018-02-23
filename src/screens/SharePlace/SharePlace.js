@@ -22,9 +22,22 @@ class SharePlaceScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      placeName: ""
+    };
+
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
 
     this.addPlace = this.addPlace.bind(this);
+    this.placeNameChangedHandler = this.placeNameChangedHandler.bind(this);
+  }
+
+  placeNameChangedHandler(placeName) {
+    if (!placeName.trim()) {
+      alert("Input is empty");
+    } else {
+      this.setState(prevState => ({ placeName }));
+    }
   }
 
   onNavigatorEvent(event) {
@@ -35,15 +48,20 @@ class SharePlaceScreen extends Component {
     }
   }
 
-  addPlace(placeName) {
+  addPlace() {
+    const { placeName } = this.state;
+
     if (!placeName.trim()) {
       alert("Input is empty");
     } else {
       this.props.addPlace(placeName);
+      this.setState(prevState => ({ placeName: "" }));
     }
   }
 
   render() {
+    const { placeName } = this.state;
+
     return (
       <ScrollView>
         <View style={styles.wrapper}>
@@ -55,10 +73,14 @@ class SharePlaceScreen extends Component {
 
           <PickLocation />
 
-          <PlaceInput placeholder="Place Name" />
+          <PlaceInput
+            placeholder="Place Name"
+            placeName={placeName}
+            placeNameChangedHandler={this.placeNameChangedHandler}
+          />
 
           <View style={styles.button}>
-            <Button title="Share the Place!" onPress={() => {}} />
+            <Button title="Share the Place!" onPress={this.addPlace} />
           </View>
         </View>
       </ScrollView>
