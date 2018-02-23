@@ -6,10 +6,13 @@ import {
   Dimensions,
   StyleSheet
 } from "react-native";
+import { Platform } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
 class SideDrawer extends Component {
   render() {
+    const isAndroidPlatform = Platform.OS === "android";
+
     return (
       <View
         style={[
@@ -19,7 +22,11 @@ class SideDrawer extends Component {
       >
         <TouchableOpacity>
           <View style={styles.menuItem}>
-            <Icon name="ios-log-out" size={30} color="#000" />
+            <Icon
+              name={isAndroidPlatform ? "md-log-out" : "ios-log-out"}
+              size={30}
+              color="#000"
+            />
             <Text style={styles.menuItemText}>Log out</Text>
           </View>
         </TouchableOpacity>
