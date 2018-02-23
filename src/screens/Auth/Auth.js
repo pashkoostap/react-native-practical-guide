@@ -19,7 +19,16 @@ class AuthScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      windowHeight: Dimensions.get("window").height > 500
+    };
+
+    Dimensions.addEventListener("change", dimensions => {
+      this.setWindowHeight(dimensions.window.height);
+    });
+
     this.loginHandler = this.loginHandler.bind(this);
+    this.setWindowHeight = this.setWindowHeight.bind(this);
   }
 
   static navigationOptions = {
@@ -28,14 +37,25 @@ class AuthScreen extends Component {
     }
   };
 
+  setWindowHeight(windowHeight) {
+    this.setState(prevState => ({ windowHeight }));
+  }
+
   loginHandler() {
     startMainTabs();
   }
 
   render() {
+    const minWindowHeight = 500;
+    const windowHeightCondition = this.state.windowHeight > minWindowHeight;
+    const passwordContainerStyles = {
+      flexDirection: windowHeightCondition ? "column" : "row",
+      flexWrap: windowHeightCondition ? "wrap" : "nowrap",
+      justifyContent: windowHeightCondition ? "flex-start" : "space-between"
+    };
     let headingText = null;
 
-    if (Dimensions.get("window").height > 500) {
+    if (windowHeightCondition) {
       headingText = (
         <MainText>
           <HeadingText>Please Log In</HeadingText>
@@ -57,7 +77,7 @@ class AuthScreen extends Component {
 
           <View style={styles.inputContainer}>
             <DefaultInput placeholder="Your email" style={styles.inputStyles} />
-            <View style={styles.passwordContainer}>
+            <View style={passwordContainerStyles}>
               <View>
                 <DefaultInput
                   placeholder="Password"
@@ -100,12 +120,6 @@ const styles = StyleSheet.create({
   bgImage: {
     width: "100%",
     flex: 1
-  },
-  passwordContainer: {
-    flexDirection: Dimensions.get("window").height > 500 ? "column" : "row",
-    flexWrap: Dimensions.get("window").height > 500 ? "wrap" : "nowrap",
-    justifyContent:
-      Dimensions.get("window").height > 500 ? "flex-start" : "space-between"
   }
 });
 
