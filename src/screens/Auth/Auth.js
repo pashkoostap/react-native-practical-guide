@@ -9,6 +9,7 @@ import {
   Dimensions
 } from "react-native";
 
+import { inputValidator } from "../../utils/validators";
 import startMainTabs from "../MainTabs/startMainTabs";
 import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
 import HeadingText from "../../components/UI/HeadingText/HeadingText";
@@ -74,13 +75,46 @@ class AuthScreen extends Component {
   }
 
   updateInputState(key, value) {
+    const { controls } = this.state;
+    const isPasswordKey = key === "password";
+    let connectedValue = {};
+
+    if (controls[key].validationRules.equalTo) {
+      const equalControl = controls[key].validationRules.equalTo;
+      const equalValue = controls[equalControl].value;
+      connectedValue = {
+        equalTo: equalValue
+      };
+    } else if (isPasswordKey) {
+      connectedValue = {
+        equalTo: value
+      };
+    }
+
     this.setState(prevState => {
+      const { controls } = prevState;
+
       return {
         controls: {
-          ...prevState.controls,
+          ...controls,
+          confirmPassword: {
+            ...controls.confirmPassword,
+            isValid: isPasswordKey
+              ? inputValidator(
+                  controls.confirmPassword.value,
+                  controls.confirmPassword.validationRules,
+                  connectedValue
+                )
+              : controls.confirmPassword.isValid
+          },
           [key]: {
-            ...prevState.controls[key],
-            value
+            ...controls[key],
+            value,
+            isValid: inputValidator(
+              value,
+              controls[key].validationRules,
+              connectedValue
+            )
           }
         }
       };
