@@ -5,7 +5,8 @@ import {
   Text,
   Button,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -25,6 +26,7 @@ class PlaceDetail extends Component {
 
   render() {
     const { selectedPlace: { placeImage, placeName } } = this.props;
+    const isAndroidPlatform = Platform.OS === "android";
 
     return (
       <View style={styles.viewWrapContainer}>
@@ -34,7 +36,11 @@ class PlaceDetail extends Component {
         <View style={styles.buttonsWrap}>
           <TouchableOpacity onPress={this.onPlaceItemDelete}>
             <View style={styles.buttonStyles}>
-              <Icon size={30} color="red" name="md-trash" />
+              <Icon
+                size={30}
+                color="red"
+                name={isAndroidPlatform ? "md-trash" : "ios-trash"}
+              />
               <Text style={styles.textStyles}>Delete</Text>
             </View>
           </TouchableOpacity>
