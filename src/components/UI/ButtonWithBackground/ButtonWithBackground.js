@@ -8,12 +8,25 @@ import {
   Platform
 } from "react-native";
 
-const ButtonWithBackground = ({ onPress, children, color }) => {
+const ButtonWithBackground = ({ onPress, children, color, disabled }) => {
   const innerContent = (
-    <View style={[styles.button, { backgroundColor: color }]}>
-      <Text style={styles.text}>{children.toUpperCase()}</Text>
+    <View
+      style={[
+        styles.button,
+        { backgroundColor: color },
+        disabled ? styles.disabled : null
+      ]}
+    >
+      <Text style={[styles.text, disabled ? styles.disabledText : null]}>
+        {children.toUpperCase()}
+      </Text>
     </View>
   );
+
+  if (disabled) {
+    return innerContent;
+  }
+
   if (Platform.OS === "android") {
     return (
       <TouchableNativeFeedback onPress={onPress}>
@@ -39,6 +52,13 @@ const styles = StyleSheet.create({
   text: {
     color: "#fff",
     fontWeight: "bold"
+  },
+  disabledText: {
+    color: "#aaa"
+  },
+  disabled: {
+    backgroundColor: "#eee",
+    borderColor: "#aaa"
   }
 });
 
