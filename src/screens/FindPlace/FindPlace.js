@@ -66,11 +66,12 @@ class FindPlaceScreen extends Component {
     let content = (
       <Animated.View
         style={{
+          opacity: removeAnimation,
           transform: [
             {
               scale: removeAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [3, 1]
+                outputRange: [2, 1]
               })
             }
           ]
