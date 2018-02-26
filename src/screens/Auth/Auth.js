@@ -25,10 +25,34 @@ class AuthScreen extends Component {
       viewMode:
         Dimensions.get("window").height > this.windowBreakPoint
           ? "portrait"
-          : "album"
+          : "album",
+      controls: {
+        email: {
+          value: "",
+          valid: false,
+          validationRules: {
+            isEmail: true
+          }
+        },
+        password: {
+          value: "",
+          valid: false,
+          validationRules: {
+            minLength: 6
+          }
+        },
+        confirmPassword: {
+          value: "",
+          valid: false,
+          validationRules: {
+            equalTo: "password"
+          }
+        }
+      }
     };
 
     this.loginHandler = this.loginHandler.bind(this);
+    this.updateInputState = this.updateInputState.bind(this);
     this.dementionsChangeListener = this.dementionsChangeListener.bind(this);
   }
 
@@ -49,6 +73,20 @@ class AuthScreen extends Component {
     startMainTabs();
   }
 
+  updateInputState(key, value) {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          [key]: {
+            ...prevState.controls[key],
+            value
+          }
+        }
+      };
+    });
+  }
+
   componentWillMount() {
     Dimensions.addEventListener("change", this.dementionsChangeListener);
   }
@@ -58,6 +96,7 @@ class AuthScreen extends Component {
   }
 
   render() {
+    const { controls: { email, password, confirmPassword } } = this.state;
     const isPortraitMode = this.state.viewMode === "portrait";
     const passwordContainerStyles = isPortraitMode
       ? styles.passwordContainerPortrait
@@ -85,18 +124,33 @@ class AuthScreen extends Component {
           </ButtonWithBackground>
 
           <View style={styles.inputContainer}>
-            <DefaultInput placeholder="Your email" style={styles.inputStyles} />
+            <DefaultInput
+              placeholder="Your email"
+              style={styles.inputStyles}
+              value={email.value}
+              onChangeTextHandler={val => this.updateInputState("email", val)}
+            />
+
             <View style={passwordContainerStyles}>
               <View>
                 <DefaultInput
                   placeholder="Password"
                   style={styles.inputStyles}
+                  value={password.value}
+                  onChangeTextHandler={val =>
+                    this.updateInputState("password", val)
+                  }
                 />
               </View>
+
               <View>
                 <DefaultInput
                   placeholder="Confirm password"
                   style={styles.inputStyles}
+                  value={confirmPassword.value}
+                  onChangeTextHandler={val =>
+                    this.updateInputState("confirmPassword", val)
+                  }
                 />
               </View>
             </View>

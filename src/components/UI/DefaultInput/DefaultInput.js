@@ -7,6 +7,7 @@ const DefaultInput = props => {
       underlineColorAndroid="transparent"
       {...props}
       style={[styles.inputStyles, props.style]}
+      onChangeText={props.onChangeTextHandler}
     />
   );
 };
