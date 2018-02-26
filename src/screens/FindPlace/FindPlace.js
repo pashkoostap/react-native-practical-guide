@@ -13,6 +13,10 @@ class FindPlaceScreen extends Component {
     this.onPlaceItemSelect = this.onPlaceItemSelect.bind(this);
   }
 
+  static navigatorStyle = {
+    navBarButtonColor: "orange"
+  };
+
   onNavigatorEvent(event) {
     if (event.type === "NavBarButtonPress" && event.id === "sideDrawerToggle") {
       this.props.navigator.toggleDrawer({

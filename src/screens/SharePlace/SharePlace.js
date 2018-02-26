@@ -32,6 +32,10 @@ class SharePlaceScreen extends Component {
     this.placeNameChangedHandler = this.placeNameChangedHandler.bind(this);
   }
 
+  static navigatorStyle = {
+    navBarButtonColor: "orange"
+  };
+
   placeNameChangedHandler(placeName) {
     if (!placeName.trim()) {
       alert("Input is empty");
