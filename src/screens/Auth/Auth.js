@@ -8,6 +8,8 @@ import {
   ImageBackground,
   Dimensions
 } from "react-native";
+import { connect } from "react-redux";
+import { tryAuth } from "../../store/actions";
 
 import { inputValidator } from "../../utils/validators";
 import startMainTabs from "../MainTabs/startMainTabs";
@@ -74,7 +76,14 @@ class AuthScreen extends Component {
   }
 
   loginHandler() {
+    const { controls: { email, password } } = this.state;
+    const authData = {
+      email: email.value,
+      password: password.value
+    };
+
     startMainTabs();
+    this.props.onLogin(authData);
   }
 
   updateInputState(key, value) {
@@ -112,7 +121,7 @@ class AuthScreen extends Component {
           },
           [key]: {
             ...controls[key],
-            value,
+            value: value,
             isTouched: true,
             isValid: inputValidator(
               value,
@@ -247,4 +256,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AuthScreen;
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: authData => dispatch(tryAuth(authData))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AuthScreen);
