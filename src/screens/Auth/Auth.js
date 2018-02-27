@@ -29,6 +29,7 @@ class AuthScreen extends Component {
         Dimensions.get("window").height > this.windowBreakPoint
           ? "portrait"
           : "album",
+      authMode: "login",
       controls: {
         email: {
           value: "",
@@ -58,6 +59,7 @@ class AuthScreen extends Component {
     };
 
     this.loginHandler = this.loginHandler.bind(this);
+    this.switchModeHandler = this.switchModeHandler.bind(this);
     this.updateInputState = this.updateInputState.bind(this);
     this.dementionsChangeListener = this.dementionsChangeListener.bind(this);
   }
@@ -73,6 +75,14 @@ class AuthScreen extends Component {
       viewMode:
         dimensions.window.height > this.windowBreakPoint ? "portrait" : "album"
     }));
+  }
+
+  switchModeHandler() {
+    this.setState(prevState => {
+      return {
+        authMode: prevState.authMode === "login" ? "signup" : "login"
+      };
+    });
   }
 
   loginHandler() {
@@ -145,19 +155,34 @@ class AuthScreen extends Component {
   render() {
     const {
       controls: { email, password, confirmPassword },
-      viewMode
+      viewMode,
+      authMode
     } = this.state;
+    const isLoginAuthMode = authMode === "login";
+    const switchButtonText = `Switch to ${
+      isLoginAuthMode ? "Sign Up" : "Login"
+    }`;
     const isPortraitMode = viewMode === "portrait";
-    const passwordContainerStyles = isPortraitMode
-      ? styles.passwordContainerPortrait
-      : styles.passwordContainerAlbum;
-    let headingText = null;
+    const passwordContainerStyles =
+      isPortraitMode || isLoginAuthMode
+        ? styles.passwordContainerPortrait
+        : styles.passwordContainerAlbum;
+    let confirmPasswordControl = null;
 
-    if (isPortraitMode) {
-      headingText = (
-        <MainText>
-          <HeadingText>Please Log In</HeadingText>
-        </MainText>
+    if (!isLoginAuthMode) {
+      confirmPasswordControl = (
+        <View>
+          <DefaultInput
+            placeholder="Confirm password"
+            style={styles.inputStyles}
+            value={confirmPassword.value}
+            isValid={confirmPassword.isValid}
+            isTouched={confirmPassword.isTouched}
+            onChangeTextHandler={val =>
+              this.updateInputState("confirmPassword", val)
+            }
+          />
+        </View>
       );
     }
 
@@ -167,10 +192,11 @@ class AuthScreen extends Component {
         style={styles.bgImage}
       >
         <View style={styles.container}>
-          {headingText}
-
-          <ButtonWithBackground color="#29aaf4" onPress={() => {}}>
-            Switch to login
+          <ButtonWithBackground
+            color="#29aaf4"
+            onPress={this.switchModeHandler}
+          >
+            {switchButtonText}
           </ButtonWithBackground>
 
           <View style={styles.inputContainer}>
@@ -197,29 +223,20 @@ class AuthScreen extends Component {
                 />
               </View>
 
-              <View>
-                <DefaultInput
-                  placeholder="Confirm password"
-                  style={styles.inputStyles}
-                  value={confirmPassword.value}
-                  isValid={confirmPassword.isValid}
-                  isTouched={confirmPassword.isTouched}
-                  onChangeTextHandler={val =>
-                    this.updateInputState("confirmPassword", val)
-                  }
-                />
-              </View>
+              {confirmPasswordControl}
             </View>
           </View>
 
           <ButtonWithBackground
             color="#29aaf4"
             disabled={
-              !email.isValid || !password.isValid || !confirmPassword.isValid
+              !email.isValid ||
+              !password.isValid ||
+              (!confirmPassword.isValid && !isLoginAuthMode)
             }
             onPress={this.loginHandler}
           >
-            Login
+            Submit
           </ButtonWithBackground>
         </View>
       </ImageBackground>
