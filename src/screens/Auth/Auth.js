@@ -6,7 +6,10 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  Dimensions
+  Dimensions,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback
 } from "react-native";
 import { connect } from "react-redux";
 import { tryAuth } from "../../store/actions";
@@ -192,7 +195,7 @@ class AuthScreen extends Component {
         source={{ uri: "https://www.w3schools.com/howto/img_fjords.jpg" }}
         style={styles.bgImage}
       >
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
           <ButtonWithBackground
             color="#29aaf4"
             onPress={this.switchModeHandler}
@@ -200,35 +203,37 @@ class AuthScreen extends Component {
             {switchButtonText}
           </ButtonWithBackground>
 
-          <View style={styles.inputContainer}>
-            <DefaultInput
-              placeholder="Your email"
-              style={styles.inputStyles}
-              value={email.value}
-              isValid={email.isValid}
-              isTouched={email.isTouched}
-              keyboardType="email-address"
-              onChangeTextHandler={val => this.updateInputState("email", val)}
-            />
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.inputContainer}>
+              <DefaultInput
+                placeholder="Your email"
+                style={styles.inputStyles}
+                value={email.value}
+                isValid={email.isValid}
+                isTouched={email.isTouched}
+                keyboardType="email-address"
+                onChangeTextHandler={val => this.updateInputState("email", val)}
+              />
 
-            <View style={passwordContainerStyles}>
-              <View>
-                <DefaultInput
-                  placeholder="Password"
-                  style={styles.inputStyles}
-                  value={password.value}
-                  isValid={password.isValid}
-                  isTouched={password.isTouched}
-                  secureTextEntry
-                  onChangeTextHandler={val =>
-                    this.updateInputState("password", val)
-                  }
-                />
+              <View style={passwordContainerStyles}>
+                <View>
+                  <DefaultInput
+                    placeholder="Password"
+                    style={styles.inputStyles}
+                    value={password.value}
+                    isValid={password.isValid}
+                    isTouched={password.isTouched}
+                    secureTextEntry
+                    onChangeTextHandler={val =>
+                      this.updateInputState("password", val)
+                    }
+                  />
+                </View>
+
+                {confirmPasswordControl}
               </View>
-
-              {confirmPasswordControl}
             </View>
-          </View>
+          </TouchableWithoutFeedback>
 
           <ButtonWithBackground
             color="#29aaf4"
@@ -241,7 +246,7 @@ class AuthScreen extends Component {
           >
             Submit
           </ButtonWithBackground>
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     );
   }
