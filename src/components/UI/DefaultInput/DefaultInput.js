@@ -9,6 +9,8 @@ const DefaultInput = props => {
     <TextInput
       underlineColorAndroid="transparent"
       {...props}
+      autoCapitalize="none"
+      autoCorrect={false}
       style={[styles.inputStyles, props.style, invalidStyles]}
       onChangeText={props.onChangeTextHandler}
     />

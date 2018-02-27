@@ -178,6 +178,7 @@ class AuthScreen extends Component {
             value={confirmPassword.value}
             isValid={confirmPassword.isValid}
             isTouched={confirmPassword.isTouched}
+            secureTextEntry
             onChangeTextHandler={val =>
               this.updateInputState("confirmPassword", val)
             }
@@ -206,6 +207,7 @@ class AuthScreen extends Component {
               value={email.value}
               isValid={email.isValid}
               isTouched={email.isTouched}
+              keyboardType="email-address"
               onChangeTextHandler={val => this.updateInputState("email", val)}
             />
 
@@ -217,6 +219,7 @@ class AuthScreen extends Component {
                   value={password.value}
                   isValid={password.isValid}
                   isTouched={password.isTouched}
+                  secureTextEntry
                   onChangeTextHandler={val =>
                     this.updateInputState("password", val)
                   }
