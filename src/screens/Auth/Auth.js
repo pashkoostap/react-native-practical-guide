@@ -35,7 +35,7 @@ class AuthScreen extends Component {
       authMode: "login",
       controls: {
         email: {
-          value: "",
+          value: "user@user.user",
           valid: false,
           validationRules: {
             isEmail: true
@@ -43,7 +43,7 @@ class AuthScreen extends Component {
           isTouched: false
         },
         password: {
-          value: "",
+          value: "1234563",
           valid: false,
           validationRules: {
             minLength: 6

@@ -14,10 +14,8 @@ const reducer = (state = initialState, action) => {
           {
             key: Math.random() + new Date(),
             placeName: action.placeName,
-            placeImage: {
-              uri:
-                "http://ukrainetrek.com/blog/wp-content/uploads/2011/12/ukrainian-carpathians-landscape-16.jpg"
-            }
+            location: action.location,
+            placeImage: { uri: action.placeImage.uri }
           }
         ]
       };

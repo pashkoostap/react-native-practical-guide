@@ -10,8 +10,7 @@ const PlaceInput = ({
 }) => (
   <DefaultInput
     value={placeName}
-    onChangeText={placeNameChangedHandler}
-    onSubmitEditing={placeNameSubmitHandler}
+    onChangeTextHandler={placeNameChangedHandler}
     blurOnSubmit={true}
   />
 );
