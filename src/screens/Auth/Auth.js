@@ -28,6 +28,7 @@ class AuthScreen extends Component {
     this.windowBreakPoint = 500;
 
     this.state = {
+      isValid: true,
       viewMode:
         Dimensions.get("window").height > this.windowBreakPoint
           ? "portrait"
@@ -35,7 +36,7 @@ class AuthScreen extends Component {
       authMode: "login",
       controls: {
         email: {
-          value: "user@user.user",
+          value: "",
           valid: false,
           validationRules: {
             isEmail: true
@@ -43,7 +44,7 @@ class AuthScreen extends Component {
           isTouched: false
         },
         password: {
-          value: "1234563",
+          value: "",
           valid: false,
           validationRules: {
             minLength: 6
@@ -157,6 +158,7 @@ class AuthScreen extends Component {
 
   render() {
     const {
+      isValid,
       controls: { email, password, confirmPassword },
       viewMode,
       authMode
@@ -235,7 +237,7 @@ class AuthScreen extends Component {
             </View>
           </TouchableWithoutFeedback>
 
-          <ButtonWithBackground
+          {/* <ButtonWithBackground
             color="#29aaf4"
             disabled={
               !email.isValid ||
@@ -244,6 +246,10 @@ class AuthScreen extends Component {
             }
             onPress={this.loginHandler}
           >
+            Submit
+          </ButtonWithBackground> */}
+
+          <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
             Submit
           </ButtonWithBackground>
         </KeyboardAvoidingView>
