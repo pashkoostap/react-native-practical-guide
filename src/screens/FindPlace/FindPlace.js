@@ -30,7 +30,8 @@ class FindPlaceScreen extends Component {
   };
 
   placesSearchHandler() {
-    // this.setState(prevState => ({ placesLoaded: true }));
+    this.setState(prevState => ({ placesLoaded: true }));
+
     Animated.timing(this.state.removeAnimation, {
       toValue: 0,
       duration: 500,

@@ -28,7 +28,6 @@ class PickLocation extends Component {
   getDeviceLocation() {
     navigator.geolocation.getCurrentPosition(
       pos => {
-        console.log(pos);
         const coordsEvent = {
           nativeEvent: {
             coordinate: {
@@ -56,6 +55,7 @@ class PickLocation extends Component {
         longitude: coordinate.longitude
       };
       this.mapRef.animateToRegion(newCoordinates);
+      this.props.onLocationPick(newCoordinates);
 
       return {
         focusedLocation: newCoordinates,
