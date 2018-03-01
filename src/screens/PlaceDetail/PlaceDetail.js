@@ -8,7 +8,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import MapView from "react-native-maps";
@@ -29,17 +30,25 @@ class PlaceDetail extends Component {
   render() {
     const { selectedPlace: { placeImage, placeName, location } } = this.props;
     const isAndroidPlatform = Platform.OS === "android";
+    const initialRegion = {
+      ...location,
+      latitudeDelta: 0.0122,
+      longitudeDelta:
+        Dimensions.get("window").width /
+        Dimensions.get("window").height *
+        0.0122
+    };
 
     return (
       <ScrollView>
         <View style={styles.viewWrapContainer}>
-          <Image source={placeImage} style={styles.placeImage} />
-
           <View style={styles.mapWrapper}>
-            <MapView initialRegion={location} style={styles.map}>
+            <MapView initialRegion={initialRegion} style={styles.map}>
               <MapView.Marker coordinate={location} />
             </MapView>
           </View>
+
+          <Image source={{ uri: placeImage }} style={styles.placeImage} />
 
           <Text style={styles.placeName}>{placeName}</Text>
 
@@ -96,7 +105,8 @@ const styles = StyleSheet.create({
   },
   mapWrapper: {
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 10
   }
 });
 

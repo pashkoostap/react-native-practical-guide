@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "react-native-practical-guide",
+  "private_key_id": "bce2c1c1e69b248a1160d8c051499065722a71c8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCJat5vXInh8pH7\naFK3Q50I/siExC8coNp4++DmkUhWweOKv4mpN4yY0z0t5QB1h526vwi9KKWLF/SN\nF494ULXDEXQVunxE4jP2BRlpcCOULfm0Gm4fpEpHL4qjBqz9FyXrtapBGVNFeDub\nkJWQkxQkGLjjd6G6vzkHxwegt3esRofqWlwlRqsMv21CRWBQ+H6h19BUlQQYB7s6\nduqaEivwwfimwivcxdf5G17mHjGlPaSraA9HIYuza28U4cZw28BxpCVS2F52GMoh\nwaOR8UTnfLE3is2kQgsGmEWGDYfEy9NQF8wAfO+XjBZDv55NdgqkMTgCWtgYi7Es\nqg35SYr7AgMBAAECggEAOogtxMtq47YZ3jdafDstiWZU7NBPrOcLB9tpuWwKnwGp\nNTFOpqhFl9bqSUEwx98DHUc/pqrIkI2cmfh+IOZn9XXat2Keigy7yz/yygl87iID\nKWbUn1+wT8/9QmGWj5sriNHxehcadA25fhLA0jsDqjhpkGIlnlDTLu/k3N0o+VTV\nySTtbIzkIMKUKfATL409pdT8FHmXUMeIRX0GHJbEaDgWC0lt/fApEdBcFI9cyMS4\ndHt9mwO+6O96hiRXk99UDHVAs/9Q2vu+pZrc7dCT5VkWJuEPipAhA0DMTR+/5qF4\nl16FzToZnkiP8fUfxflUlyQEBXdmL1xpXbKn8+KviQKBgQC8Xmq1yMXKbokbM0jO\nUfQpg8ybDAHeRo7xvo275Q70EGTTeGRVLoNL+gJiTG4cnzZMA9+vpYXQrxajxLG9\nNESBcUiO1ZFHtF9cmrN2FjEk/basGH+WYJJDVSJ5b5NjHHZKDhaPCYwwUKZ27hC7\nk2wv5hCBw1EaUSznFJOI6aRXjwKBgQC6wVlRjjcCqa/6zcWG0gyQ4dK8XRe4o0C+\nlHLuE1ftk1gEMyrrmtgcl1FslZ8DJg6r8NpZgCjZk5xSSCfERWVB4gljsMoQ7ju/\nMH0OQD8Rbu6kQGLytS1SVREuL/1SE5dX0fAYtxObPePCNxt/Jn/W568O1wUov3y3\nRlqbMbe/1QKBgBf4m/POPP1p26DOgfFflIbD8wG4IXS73ez9puPGXoTIoUwYAgyl\nAqhkhHEl8M1LpYk+5PRhSAoqfeMRYN0HDcC7PdSPcRGC7q/GMBhS8qYWc2yrIXFt\nkK9o4h46CLOQJ6185XoGaQSs/sIbwZ1dQWNHD8qzpFqJAgHWKIA/214ZAoGAf/cA\nJrvVwcNXy/i3QjwnVBcIeP0oxeFG+c9qOOuUMjvl8WrGHA5Lyrt8lXSoMlYfc31j\ngDQqyXs1f8PlS71pNo2VdXOr4ZH76nNlHSC0llN2vaFIq5mtZl7XmNhVMaou54P4\nilbX3mW37FoqQyO0MSMrdnWrGVKsOEDC0NhuWckCgYBdEcGgL2G1vNH+fZ0TmXXk\nQCaZCpbFbH9IpDpLEqw7Qx+128ih6crBaiGJmfGT58HJ95TjjdRIvqTrN+W6IaFl\nz9NBy/rrP6BgGQ1EeRnmqnbq6H4va6YCY2D32gc1aD1uM/6ctj1ezM/ZC8ttpxt/\nxfQ1wNuT9/cLA9qg46zsZA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-voysm@react-native-practical-guide.iam.gserviceaccount.com",
+  "client_id": "102935758142381026093",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-voysm%40react-native-practical-guide.iam.gserviceaccount.com"
+}

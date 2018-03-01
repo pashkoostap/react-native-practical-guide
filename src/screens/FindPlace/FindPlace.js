@@ -7,6 +7,7 @@ import {
   Animated
 } from "react-native";
 import { connect } from "react-redux";
+import { getPlaces } from "../../store/actions/places";
 
 import PlacesList from "../../components/PlaceList/PlaceList";
 
@@ -59,6 +60,14 @@ class FindPlaceScreen extends Component {
         selectedPlace
       }
     });
+  }
+
+  componentWillMount() {
+    this.props.getPlaces();
+  }
+
+  componentWillUnmount() {
+    console.log("dasdsd");
   }
 
   render() {
@@ -120,8 +129,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ placesReducer }) => {
-  return { placesReducer };
+const mapStateToProps = ({ placesReducer }) => ({ placesReducer });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getPlaces: () => dispatch(getPlaces())
+  };
 };
 
-export default connect(mapStateToProps, null)(FindPlaceScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);

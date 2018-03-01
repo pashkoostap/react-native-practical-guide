@@ -1,4 +1,4 @@
-import { ADD_PLACE, DELETE_PLACE } from "../actions/actionTypes";
+import { ADD_PLACE, DELETE_PLACE, GET_PLACES } from "../actions/actionTypes";
 
 const initialState = {
   places: []
@@ -12,10 +12,10 @@ const reducer = (state = initialState, action) => {
         places: [
           ...state.places,
           {
-            key: Math.random() + new Date(),
+            key: action.key,
             placeName: action.placeName,
             location: action.location,
-            placeImage: { uri: action.placeImage.uri }
+            placeImage: action.placeImage
           }
         ]
       };
@@ -24,6 +24,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         places: state.places.filter(item => item.key !== action.placeKey)
+      };
+
+    case GET_PLACES:
+      return {
+        ...state,
+        places: action.places
       };
 
     default:

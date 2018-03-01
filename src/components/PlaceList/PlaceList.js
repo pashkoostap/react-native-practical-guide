@@ -11,7 +11,7 @@ const PlaceList = ({ places, onPlaceItemSelect }) => {
       renderItem={({ item: { key, placeName, placeImage } }) => (
         <ListItem
           placeName={placeName}
-          placeImage={placeImage}
+          placeImage={{ uri: placeImage }}
           onItemPressed={() => onPlaceItemSelect(key)}
         />
       )}
