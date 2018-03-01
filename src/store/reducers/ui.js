@@ -1,10 +1,10 @@
 import { UI_START_LOADING, UI_STOP_LOADING } from "../actions/actionTypes";
 
-const initState = {
+const initialState = {
   isLoading: false
 };
 
-const uiReducer = (state = initState, action) => {
+const uiReducer = (state = initialState, action) => {
   switch (action.type) {
     case UI_START_LOADING:
       return { ...state, isLoading: true };
