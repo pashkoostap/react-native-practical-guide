@@ -12,7 +12,8 @@ export const getPlaces = () => {
 
         dispatch(uiStopLoading());
         dispatch({ type: GET_PLACES, places });
-      });
+      })
+      .catch(err => dispatch(uiStopLoading()));
   };
 };
 

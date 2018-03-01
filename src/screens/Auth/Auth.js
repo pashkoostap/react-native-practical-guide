@@ -9,13 +9,13 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from "react-native";
 import { connect } from "react-redux";
 import { tryAuth } from "../../store/actions";
 
 import { inputValidator } from "../../utils/validators";
-import startMainTabs from "../MainTabs/startMainTabs";
 import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
 import HeadingText from "../../components/UI/HeadingText/HeadingText";
 import MainText from "../../components/UI/MainText/MainText";
@@ -96,7 +96,6 @@ class AuthScreen extends Component {
       password: password.value
     };
 
-    startMainTabs();
     this.props.onLogin(authData);
   }
 
@@ -163,6 +162,7 @@ class AuthScreen extends Component {
       viewMode,
       authMode
     } = this.state;
+    const { isLoading } = this.props;
     const isLoginAuthMode = authMode === "login";
     const switchButtonText = `Switch to ${
       isLoginAuthMode ? "Sign Up" : "Login"
@@ -248,10 +248,13 @@ class AuthScreen extends Component {
           >
             Submit
           </ButtonWithBackground> */}
+          <View style={styles.submitWrapper}>
+            <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
+              Submit
+            </ButtonWithBackground>
 
-          <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
-            Submit
-          </ButtonWithBackground>
+            {isLoading && <ActivityIndicator />}
+          </View>
         </KeyboardAvoidingView>
       </ImageBackground>
     );
@@ -284,8 +287,16 @@ const styles = StyleSheet.create({
   passwordContainerAlbum: {
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  hidden: {
+    display: "none"
+  },
+  submitWrapper: {
+    flexDirection: "row"
   }
 });
+
+const mapStateToProps = ({ uiReducer: { isLoading } }) => ({ isLoading });
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -293,4 +304,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(AuthScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
