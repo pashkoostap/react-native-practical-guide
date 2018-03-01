@@ -16,6 +16,7 @@ const googleCloudStorage = require("@google-cloud/storage")(googleCloudConfig);
 //  response.send("Hello from Firebase!");
 // });
 
+// URL https://us-central1-react-native-practical-guide.cloudfunctions.net/storeImage
 exports.storeImage = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const body = JSON.parse(req.body);

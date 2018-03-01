@@ -15,7 +15,10 @@ const reducer = (state = initialState, action) => {
             key: Math.random() + new Date(),
             placeName: action.placeName,
             location: action.location,
-            placeImage: { uri: action.placeImage.uri }
+            placeImage: {
+              uri: action.placeImage.uri,
+              base64: action.placeImage.base64
+            }
           }
         ]
       };
