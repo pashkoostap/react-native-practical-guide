@@ -62,8 +62,24 @@ export const addPlace = (placeName, location, placeImage) => {
 };
 
 export const deletePlace = placeKey => {
-  return {
-    type: DELETE_PLACE,
-    placeKey
+  return dispatch => {
+    dispatch(uiStartLoading());
+
+    fetch(
+      "https://react-native-practical-guide.firebaseio.com/places/" +
+        placeKey +
+        ".json",
+      {
+        method: "DELETE"
+      }
+    )
+      .then(res => res.json())
+      .then(res => {
+        dispatch(uiStopLoading());
+        dispatch({
+          type: DELETE_PLACE,
+          placeKey
+        });
+      });
   };
 };
