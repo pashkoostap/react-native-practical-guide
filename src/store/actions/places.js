@@ -1,10 +1,28 @@
-import { ADD_PLACE, DELETE_PLACE } from "./actionTypes";
+import { ADD_PLACE, DELETE_PLACE, GET_PLACES } from "./actionTypes";
 import { uiStartLoading, uiStopLoading } from "./ui";
 
+export const getPlaces = () => {
+  return dispatch => {
+    dispatch(uiStartLoading());
+
+    fetch("https://react-native-practical-guide.firebaseio.com/places.json")
+      .then(res => res.json())
+      .then(res => {
+        const places = Object.keys(res).map(key => ({ ...res[key], key }));
+
+        dispatch(uiStopLoading());
+        dispatch({ type: GET_PLACES, places });
+      });
+  };
+};
+
 export const addPlace = (placeName, location, placeImage) => {
-  const place = {
+  let place = {
     placeName,
-    location
+    location: {
+      latitude: location.latitude,
+      longitude: location.longitude
+    }
   };
 
   return dispatch => {
@@ -21,21 +39,23 @@ export const addPlace = (placeName, location, placeImage) => {
       .then(res => res.json())
       .then(res => {
         // request for saving place in the firebase
+        place = {
+          ...place,
+          placeImage: res.imageUrl
+        };
+
         return fetch(
           "https://react-native-practical-guide.firebaseio.com/places.json",
           {
             method: "POST",
-            body: JSON.stringify({
-              ...place,
-              placeImage: res.imageUrl
-            })
+            body: JSON.stringify(place)
           }
         );
       })
       .then(res => res.json())
       .then(res => {
         dispatch(uiStopLoading());
-        // dispatch({ ...place, id: res.name, type: ADD_PLACE });
+        dispatch({ ...place, key: res.name, type: ADD_PLACE });
       })
       .catch(err => dispatch(uiStopLoading()));
   };
