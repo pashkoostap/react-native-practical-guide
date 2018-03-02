@@ -6,9 +6,12 @@ import startMainTabs from "../../screens/MainTabs/startMainTabs";
 const apiURL =
   "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBOc8srMkdFa1KCalkZj2jHv6ZkabRxq-I";
 
-export const tryAuth = authData => {
+export const tryAuth = (authData, authMode) => {
   return dispatch => {
-    dispatch(authSignUp(authData));
+    if (authMode === "login") {
+    } else if (authMode === "signup") {
+      dispatch(authSignUp(authData));
+    }
   };
 };
 

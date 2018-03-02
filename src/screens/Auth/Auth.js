@@ -90,13 +90,13 @@ class AuthScreen extends Component {
   }
 
   loginHandler() {
-    const { controls: { email, password } } = this.state;
+    const { controls: { email, password }, authMode } = this.state;
     const authData = {
       email: email.value,
       password: password.value
     };
 
-    this.props.onLogin(authData);
+    this.props.tryAuth(authData, authMode);
   }
 
   updateInputState(key, value) {
@@ -300,7 +300,7 @@ const mapStateToProps = ({ uiReducer: { isLoading } }) => ({ isLoading });
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: authData => dispatch(tryAuth(authData))
+    tryAuth: (authData, authMode) => dispatch(tryAuth(authData, authMode))
   };
 };
 
