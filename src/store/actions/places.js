@@ -57,7 +57,7 @@ export const addPlace = (placeName, location, placeImage) => {
       .then(res => res.json())
       .then(res => {
         dispatch(uiStopLoading());
-        dispatch({ ...place, key: res.name, type: ADD_PLACE });
+        dispatch({ place: { ...place, key: res.name }, type: ADD_PLACE });
       })
       .catch(err => dispatch(uiStopLoading()));
   };

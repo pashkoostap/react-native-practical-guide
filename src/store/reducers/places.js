@@ -9,15 +9,7 @@ const reducer = (state = initialState, action) => {
     case ADD_PLACE:
       return {
         ...state,
-        places: [
-          ...state.places,
-          {
-            key: action.key,
-            placeName: action.placeName,
-            location: action.location,
-            placeImage: action.placeImage
-          }
-        ]
+        places: [...state.places, action.place]
       };
 
     case DELETE_PLACE:
