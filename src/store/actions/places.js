@@ -1,11 +1,15 @@
 import { ADD_PLACE, DELETE_PLACE, GET_PLACES } from "./actionTypes";
 import { uiStartLoading, uiStopLoading } from "./ui";
+import { getAuthToken } from "../selectors";
+
+const placesApiURL = (token, idToDelete = "") =>
+  `https://react-native-practical-guide.firebaseio.com/places${idToDelete}.json?auth=${token}`;
 
 export const getPlaces = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(uiStartLoading());
 
-    fetch("https://react-native-practical-guide.firebaseio.com/places.json")
+    fetch(placesApiURL(getAuthToken(getState())))
       .then(res => res.json())
       .then(res => {
         const places = Object.keys(res).map(key => ({ ...res[key], key }));
@@ -26,7 +30,7 @@ export const addPlace = (placeName, location, placeImage) => {
     }
   };
 
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(uiStartLoading());
 
     // request for image deployment
@@ -45,13 +49,10 @@ export const addPlace = (placeName, location, placeImage) => {
           placeImage: res.imageUrl
         };
 
-        return fetch(
-          "https://react-native-practical-guide.firebaseio.com/places.json",
-          {
-            method: "POST",
-            body: JSON.stringify(place)
-          }
-        );
+        return fetch(placesApiURL(getAuthToken(getState())), {
+          method: "POST",
+          body: JSON.stringify(place)
+        });
       })
       .then(res => res.json())
       .then(res => {
@@ -63,17 +64,12 @@ export const addPlace = (placeName, location, placeImage) => {
 };
 
 export const deletePlace = placeKey => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(uiStartLoading());
 
-    fetch(
-      "https://react-native-practical-guide.firebaseio.com/places/" +
-        placeKey +
-        ".json",
-      {
-        method: "DELETE"
-      }
-    )
+    fetch(placesApiURL(getAuthToken(getState()), `/${placeKey}`), {
+      method: "DELETE"
+    })
       .then(res => res.json())
       .then(res => {
         dispatch(uiStopLoading());
