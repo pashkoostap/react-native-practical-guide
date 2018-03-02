@@ -3,23 +3,17 @@ import { uiStartLoading, uiStopLoading } from "./ui";
 
 import startMainTabs from "../../screens/MainTabs/startMainTabs";
 
-const apiURL =
-  "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBOc8srMkdFa1KCalkZj2jHv6ZkabRxq-I";
+const apiKey = "AIzaSyBOc8srMkdFa1KCalkZj2jHv6ZkabRxq-I";
+const apiURL = param =>
+  `https://www.googleapis.com/identitytoolkit/v3/relyingparty/${param}?key=${apiKey}`;
 
 export const tryAuth = (authData, authMode) => {
   return dispatch => {
-    if (authMode === "login") {
-    } else if (authMode === "signup") {
-      dispatch(authSignUp(authData));
-    }
-  };
-};
-
-export const authSignUp = authData => {
-  return dispatch => {
     dispatch(uiStartLoading());
 
-    fetch(apiURL, {
+    const urlParam = authMode === "login" ? "verifyPassword" : "signupNewUser";
+
+    fetch(apiURL(urlParam), {
       method: "POST",
       body: JSON.stringify({
         ...authData,
@@ -32,7 +26,7 @@ export const authSignUp = authData => {
       .then(res => res.json())
       .then(res => {
         dispatch(uiStopLoading());
-
+        console.log(res);
         if (res.error) {
           const { error: { message } } = res;
 
@@ -40,17 +34,33 @@ export const authSignUp = authData => {
             case "EMAIL_EXISTS":
               alert("User email is already exists");
               break;
+
             case "INVALID_EMAIL":
               alert("Invalid email address");
               break;
+
+            case "INVALID_PASSWORD":
+              alert("Invalid password");
+              break;
+
+            case "EMAIL_NOT_FOUND":
+              alert("User not found");
+              break;
+
+            case "USER_DISABLED":
+              alert("User is disabled");
+              break;
+
             default:
               break;
           }
         } else {
           startMainTabs();
         }
-        console.log(res);
       })
-      .catch(err => alert("Authentication error"));
+      .catch(err => {
+        dispatch(uiStopLoading());
+        alert("Authentication error");
+      });
   };
 };
