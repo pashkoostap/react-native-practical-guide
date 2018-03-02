@@ -12,7 +12,9 @@ const MainText = props => {
 const styles = StyleSheet.create({
   mainText: {
     color: "#000",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    width: "100%",
+    textAlign: "center"
   }
 });
 

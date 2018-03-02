@@ -97,6 +97,7 @@ class AuthScreen extends Component {
     };
 
     this.props.tryAuth(authData, authMode);
+    Keyboard.dismiss();
   }
 
   updateInputState(key, value) {

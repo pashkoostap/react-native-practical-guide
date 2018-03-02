@@ -43,6 +43,10 @@ export const tryAuth = (authData, authMode) => {
               alert("Invalid password");
               break;
 
+            case "MISSING_PASSWORD":
+              alert("Password field is empty");
+              break;
+
             case "EMAIL_NOT_FOUND":
               alert("User not found");
               break;
