@@ -5,6 +5,7 @@ export const GET_PLACES = "GET_PLACES";
 
 // USER ACTIONS
 export const TRY_AUTH = "TRY_AUTH";
+export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
 
 // UI LOADER
 export const UI_START_LOADING = "UI_START_LOADING";

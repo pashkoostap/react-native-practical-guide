@@ -6,27 +6,22 @@ import DefaultInput from "../UI/DefaultInput/DefaultInput";
 const PlaceInput = ({
   placeName,
   placeNameChangedHandler,
-  placeNameSubmitHandler
+  placeNameSubmitHandler,
+  placeholder
 }) => (
   <DefaultInput
     value={placeName}
+    placeholder={placeholder}
     onChangeTextHandler={placeNameChangedHandler}
     blurOnSubmit={true}
+    style={styles.input}
   />
 );
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  inputComponent: {
-    width: "80%"
-  },
-  buttonStyles: {
-    width: "auto"
+  input: {
+    marginLeft: 0,
+    marginRight: 0
   }
 });
 

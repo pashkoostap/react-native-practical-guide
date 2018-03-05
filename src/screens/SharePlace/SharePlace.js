@@ -7,7 +7,8 @@ import {
   Button,
   StyleSheet,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -89,24 +90,25 @@ class SharePlaceScreen extends Component {
 
     return (
       <ScrollView>
-        <View style={styles.wrapper}>
+        <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
           <MainText>
             <HeadingText>Share a Place with us!</HeadingText>
           </MainText>
+
+          <View style={styles.inputWrap}>
+            <PlaceInput
+              placeholder="Place Name"
+              placeName={placeName}
+              placeNameChangedHandler={this.placeNameChangedHandler}
+            />
+          </View>
 
           <PickImage onImagePick={this.onImagePick} />
 
           <PickLocation onLocationPick={this.onLocationPick} />
 
-          <PlaceInput
-            placeholder="Place Name"
-            placeName={placeName}
-            placeNameChangedHandler={this.placeNameChangedHandler}
-            placeNameSubmitHandler={this.addPlace}
-          />
-
           <View style={styles.button}>{submitButton}</View>
-        </View>
+        </KeyboardAvoidingView>
       </ScrollView>
     );
   }
@@ -120,6 +122,11 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10
+  },
+  inputWrap: {
+    width: "100%",
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 

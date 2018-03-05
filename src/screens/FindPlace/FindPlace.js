@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import { getPlaces } from "../../store/actions/places";
 
 import PlacesList from "../../components/PlaceList/PlaceList";
+import MainText from "../../components/UI/MainText/MainText";
+import HeadingText from "../../components/UI/HeadingText/HeadingText";
 
 class FindPlaceScreen extends Component {
   constructor(props) {
@@ -66,13 +68,10 @@ class FindPlaceScreen extends Component {
     this.props.getPlaces();
   }
 
-  componentWillUnmount() {
-    console.log("dasdsd");
-  }
-
   render() {
     const { placesReducer: { places } } = this.props;
     const { placesLoaded, removeAnimation } = this.state;
+
     let content = (
       <Animated.View
         style={{
@@ -96,11 +95,17 @@ class FindPlaceScreen extends Component {
     );
 
     if (placesLoaded) {
-      content = (
+      content = places.length ? (
         <PlacesList
           places={places}
           onPlaceItemSelect={this.onPlaceItemSelect}
         />
+      ) : (
+        <MainText>
+          <HeadingText style={styles.noPlacesText}>
+            There is no places yet
+          </HeadingText>
+        </MainText>
       );
     }
 
@@ -126,6 +131,9 @@ const styles = StyleSheet.create({
     color: "orange",
     fontWeight: "bold",
     fontSize: 16
+  },
+  noPlacesText: {
+    textAlign: "center"
   }
 });
 
